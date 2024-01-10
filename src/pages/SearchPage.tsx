@@ -9,6 +9,7 @@ import {
 } from "@mantine/core";
 import { useEffect, useMemo, useState } from "react";
 import Species from "../types/Species";
+import { Link } from "react-router-dom";
 
 interface Filter {
   name: string;
@@ -17,10 +18,6 @@ interface Filter {
 }
 
 const availableFilters: Filter[] = [
-  {
-    name: "Implemented",
-    filter: { implemented: true },
-  },
   {
     name: "Shoulders",
     filter: { shoulderMountable: true },
@@ -39,7 +36,7 @@ new Array(genCount).fill(0).forEach((_, i) => {
 });
 
 export default function SearchPage() {
-  const [filters, setFilters] = useState<string[]>(["Implemented"]);
+  const [filters, setFilters] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
   const [result, setResults] = useState<Species[] | null>(null);
 
@@ -119,14 +116,16 @@ export default function SearchPage() {
         />
         <Box w="100%">
           <Grid>
-            {result?.map(({ name, nationalPokedexNumber }) => (
+            {result?.map(({ name, nationalPokedexNumber, sname }) => (
               <Grid.Col span={{ base: 6, xs: 4, s: 3, md: 2, xl: 1 }}>
                 <Tooltip label={name} position="bottom">
-                  <Image
-                    src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${nationalPokedexNumber}.png`}
-                    height={160}
-                    alt={name}
-                  />
+                  <Box component={Link} to={`/pokemon/${sname}`}>
+                    <Image
+                      src={`https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/${nationalPokedexNumber}.png`}
+                      height={160}
+                      alt={name}
+                    />
+                  </Box>
                 </Tooltip>
               </Grid.Col>
             ))}

@@ -5,6 +5,7 @@ import {
 } from "@mantine/core";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import SearchPage from "./pages/SearchPage";
+import PokemonPage from "./pages/PokemonPage";
 
 const theme = createTheme({
   /** Put your mantine theme override here */
@@ -24,6 +25,7 @@ function App() {
       <BrowserRouter basename="/cobbelmon-data-client/">
         <Routes>
           <Route path="/" element={<SearchPage />} />
+          <Route path="/pokemon/:sname" element={<PokemonPage />} />
         </Routes>
       </BrowserRouter>
     </MantineProvider>
