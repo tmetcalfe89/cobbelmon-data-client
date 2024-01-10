@@ -71,10 +71,6 @@ export default function SearchPage() {
   );
 
   useEffect(() => {
-    if (!filters.length) {
-      setResults(null);
-      return;
-    }
     let stillRunning = true;
     async function fetchResults() {
       setLoading(true);
